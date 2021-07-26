@@ -34,6 +34,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// find all categories
 router.get('/', (req, res) => {
   Category.findAll({
     include: [Product]
@@ -42,6 +43,7 @@ router.get('/', (req, res) => {
   .catch((error) => res.status(500).json(error))
 });
 
+// find one categories
 router.get('/:id', (req, res) => {
   Category.findOne({
     where: {
@@ -53,7 +55,7 @@ router.get('/:id', (req, res) => {
   .catch((error) => res.status(500).json(error))
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   // create a new category route
   try {
     const newCategory = await Category.create(req.body)
@@ -64,7 +66,7 @@ router.post('/', (req, res) => {
   }
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   // update a category by its `id` value
   try {
     const updateCategory = await Category.update(
@@ -83,7 +85,7 @@ router.put('/:id', (req, res) => {
   }
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
   try {
     const deleteCategory = await Category.destroy(
